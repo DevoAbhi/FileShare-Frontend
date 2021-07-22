@@ -13,7 +13,7 @@
                     Drop your files here or <span class="browse" (click)="onBrowse()">browse</span>
                 </div>
             </div>
-            
+
             <!-- <div class="progress-container">
                 <div class="progress-bg">
                     <div class="inner-container">
@@ -47,14 +47,21 @@
                 <p>Share link via email</p>
                 <div class="email-container">
                     <form [formGroup]='form' (submit)="onSubmit()">
+                      <div class="field">
                         <label for="emailFrom">Your email : </label>
                         <input type="email" name="emailFrom" id="emailFrom">
-                        <label for="emailTo">Receiver's email(s) : </label>
+                      </div>
+                      <div class="field">
+                        <label for="emailTo">Receiver's email(s): </label>
                         <input type="email" name="emailTo" id="emailTo">
+                      </div>
+                      <div class="button">
+                        <button type="submit">Send</button>
+                      </div>
                     </form>
                 </div>
             </div>
-        </div>    
+        </div>
     </div>
     <img src="../../assets/images/FileShare-img-home.png" alt="file-upload-img">
 </div>
