@@ -11,7 +11,7 @@ const uploadUrl = `${BACKEND_HOST}/api/files`
 })
 export class RestService {
 
-    uploadFileRes = {};
+    sendEmailRes = {};
 
     constructor(private http: HttpClient) { }
 
@@ -49,5 +49,24 @@ export class RestService {
         return {
             progress: percentDone
         }
+    }
+
+    sendMail = async (uuid: string, emailFrom: string, emailTo:string) => {
+
+      const emailPayload = {
+        uuid,
+        emailFrom,
+        emailTo
+      }
+
+      await this.http.post(`${uploadUrl}/send`, emailPayload).toPromise()
+      .then(response => {
+        this.sendEmailRes = response
+      })
+      .catch(err => {
+        this.sendEmailRes = err
+      })
+
+      return this.sendEmailRes;
     }
 }

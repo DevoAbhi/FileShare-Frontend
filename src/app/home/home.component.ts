@@ -11,7 +11,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 })
 
 export class HomeComponent implements OnInit, OnDestroy{
-  
+
   upload: uploadType = {
     file: '',
     progress: 0
@@ -19,7 +19,7 @@ export class HomeComponent implements OnInit, OnDestroy{
   private subscription: Subscription | undefined;
   form!: FormGroup
   // scaleX: any;
-  
+
   constructor(private restService: RestService) {}
 
   ngOnInit(): void {
@@ -37,14 +37,14 @@ export class HomeComponent implements OnInit, OnDestroy{
       dropZone?.classList.add('dragged');
     }
   }
-  
+
   onDragLeave = (event: Event) => {
     event = event || window.event
     event.preventDefault();
     const dropZone = document.querySelector('.drop-section')
     dropZone?.classList.remove('dragged');
   }
-  
+
   onDrop = (event: DragEvent) => {
     event.preventDefault();
     const dropZone = document.querySelector('.drop-section')
@@ -53,12 +53,12 @@ export class HomeComponent implements OnInit, OnDestroy{
     const file:File = event.dataTransfer?.files[0] as File;
     this.onUploadFile(file)
   }
-  
+
   onBrowse = () => {
     const fileInput: HTMLElement = document.querySelector('.fileInput') as HTMLElement;
     fileInput?.click()
   }
-  
+
   onBrowseFile = (event: any) => {
     const file: File = event.target.files[0] as File;
     if(file != null) {
@@ -90,7 +90,18 @@ export class HomeComponent implements OnInit, OnDestroy{
     document.execCommand('copy');
   }
 
-  onSubmit = () => {
+  onSubmit = async () => {
+    if(!this.form) {
+      return;
+    }
+
+    console.log(this.form.value)
+    const uuid = this.upload.file.split('/').pop() || "";
+    const emailFrom = this.form.value.emailFrom;
+    const emailTo = this.form.value.emailTo;
+
+    const response = await this.restService.sendMail(uuid, emailFrom, emailTo);
+    console.log(response);
 
   }
 

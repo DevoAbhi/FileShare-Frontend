@@ -49,11 +49,11 @@
                     <form [formGroup]='form' (submit)="onSubmit()">
                       <div class="field">
                         <label for="emailFrom">Your email : </label>
-                        <input type="email" name="emailFrom" id="emailFrom">
+                        <input type="email" formControlName="emailFrom" id="emailFrom" required>
                       </div>
                       <div class="field">
                         <label for="emailTo">Receiver's email(s): </label>
-                        <input type="email" name="emailTo" id="emailTo">
+                        <input type="email" formControlName="emailTo" id="emailTo" required>
                       </div>
                       <div class="button">
                         <button type="submit">Send</button>
