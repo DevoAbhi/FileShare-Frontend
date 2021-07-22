@@ -1,0 +1,18 @@
+/* You can add global styles to this file, and also import other style files */
+
+:root {
+    --base-bg-color: linear-gradient(to right, #ffecec, #f5d0d0);
+    --border-color: #ff9999;
+    --dark-border-color: #ff4d4d;
+    --box-shadow: 0px 18px 28px 0px rgba(0,0,0,0.2);
+    --container-width: 500px;
+}
+
+html, body{
+    box-sizing: border-box;
+    margin: 0px;
+    padding: 0px;
+    font-family: 'Arvo', serif;
+    height: 100%;
+    background: var(--base-bg-color)
+}

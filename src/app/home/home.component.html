@@ -1,0 +1,60 @@
+<div class="wrapper">
+    <div class="upload-wrapper">
+        <div class="upload-section">
+            <div class="drop-section" (dragover)="onDragOver($event)" (dragleave)= "onDragLeave($event)" (drop)= "onDrop($event)">
+                <div class="icon">
+                    <img src="assets/images/FileShare-img-file.png" class="center" alt="">
+                    <img src="assets/images/FileShare-img-file.png" class="left" alt="">
+                    <img src="assets/images/FileShare-img-file.png" class="right" alt="">
+                </div>
+
+                <input type="file" class="fileInput" (change)="onBrowseFile($event)">
+                <div class="title">
+                    Drop your files here or <span class="browse" (click)="onBrowse()">browse</span>
+                </div>
+            </div>
+            
+            <!-- <div class="progress-container">
+                <div class="progress-bg">
+                    <div class="inner-container">
+                        <div class="title">Uploading...</div>
+                        <div class="percent-container">
+                            <span id="percent" >0</span>%
+                        </div>
+                        <div class="progress-bar"></div>
+                    </div>
+                </div>
+            </div> -->
+            <!-- *ngIf="upload.progress > 0 && upload.progress != 100" -->
+            <!-- [style.transform]= "scaleX" -->
+            <div class="progress-container" >
+                <div class="progress-bg" [style.width.%]="upload.progress"></div>
+                    <div class="inner-container">
+                        <div class="title">Uploading...</div>
+                        <div class="percent-container">
+                            <span id="percent" >{{upload.progress}}</span>%
+                        </div>
+                    <div class="progress-bar" [style.width.%]="upload.progress"></div>
+                    </div>
+            </div>
+            <!-- *ngIf="upload.progress == 100 && upload.file !== undefined" -->
+            <div class="sharing-container" >
+                <p class="expire">Link expires in 24 hours</p>
+                <div class="input-container">
+                    <input type="text" readonly id="fileUrl" [value]="upload?.file">
+                    <img src="assets/images/copy-link.svg" alt="copy link" (click)="onCopy()">
+                </div>
+                <p>Share link via email</p>
+                <div class="email-container">
+                    <form [formGroup]='form' (submit)="onSubmit()">
+                        <label for="emailFrom">Your email : </label>
+                        <input type="email" name="emailFrom" id="emailFrom">
+                        <label for="emailTo">Receiver's email(s) : </label>
+                        <input type="email" name="emailTo" id="emailTo">
+                    </form>
+                </div>
+            </div>
+        </div>    
+    </div>
+    <img src="../../assets/images/FileShare-img-home.png" alt="file-upload-img">
+</div>
