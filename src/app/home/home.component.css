@@ -2,22 +2,23 @@
 .wrapper{
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-}
+  }
 
 .upload-wrapper{
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .upload-section {
-    background-color: aliceblue;
-    border-radius: 10px;
-    box-shadow: var(--box-shadow);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+
+  background-color: aliceblue;
+  border-radius: 10px;
+  box-shadow: var(--box-shadow);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .drop-section{
@@ -162,9 +163,92 @@
     cursor: pointer;
 }
 
-.sharing-container .expire{
+p{
     opacity: 0.7;
     text-align: center;
     margin-bottom: 20px;
+}
+
+/* Email sharing */
+.email-container {
+  display: flex;
+}
+
+.email-container form {
+  width: 100%;
+  border: 2px solid var(--border-color);
+  padding: 20px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  /* align-items: center; */
+  /* justify-content: center; */
+}
+
+.email-container .field {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 5px;
+}
+
+.email-container label{
+  font-size: 18px;
+  opacity: 0.8;
+}
+
+.email-container input{
+  font-size: 18px;
+  border: none;
+  background: aliceblue;
+  border-bottom: 2px solid var(--border-color);
+  text-align: center;
+  opacity: 0.8;
+}
+
+.email-container input:focus {
+  outline: none;
+}
+
+.button {
+  margin-top: 15px;
+  text-align: center;
+  /* width: 200px; */
+}
+
+button {
+  padding: 8px 35px;
+  font-size: 18px;
+  background: var(--base-bg-color);
+  border: none;
+  border-radius: 10px;
+  opacity: 0.8;
+  cursor: pointer;
+}
+
+button:focus {
+  outline: none;
+}
+
+/* Alert */
+.alert {
+  position: absolute;
+  /* bottom: 20px; */
+  right: 35px;
+  /* left: 50%; */
+  top: 45%;
+  transform: translate(200px, -50%);
+  /* transform: translate(-50%, 0px); */
+  /* position: fixed; */
+  /* top: 50%; */
+  /* left: 50%; */
+  /* transform: translate(-50%, -30%); */
+  background: var(--dark-border-color);
+  padding: 10px 20px;
+  font-size: 18px;
+  color: aliceblue;
+  transition: transform ease-in-out 0.2s;
+  border-radius: 5px;
+  /* box-shadow: 0px 19px 28px 0px rgba(0,0,0,0.21); */
+  box-shadow: var(--box-shadow);
 }
 
