@@ -228,3 +228,23 @@ button:focus {
   outline: none;
 }
 
+/* Alert */
+.alert {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translate(-50%, 0px);
+  /* position: fixed; */
+  /* top: 50%; */
+  /* left: 50%; */
+  /* transform: translate(-50%, -30%); */
+  background: var(--dark-border-color);
+  padding: 10px;
+  font-size: 18px;
+  color: aliceblue;
+  transition: transform ease-in-out 0.2s;
+  border-radius: 5px;
+  /* box-shadow: 0px 19px 28px 0px rgba(0,0,0,0.21); */
+  box-shadow: var(--box-shadow);
+}
+

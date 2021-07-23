@@ -18,6 +18,8 @@ export class HomeComponent implements OnInit, OnDestroy{
   };
   private subscription: Subscription | undefined;
   form!: FormGroup
+  message: string = ""
+  showAlert: boolean = false;
   // scaleX: any;
 
   constructor(private restService: RestService) {}
@@ -88,6 +90,7 @@ export class HomeComponent implements OnInit, OnDestroy{
     const fileUrl: HTMLInputElement = document.querySelector('#fileUrl') as HTMLInputElement;
     fileUrl.select();
     document.execCommand('copy');
+    this.onShowAlert("Copied to clipboard🚀")
   }
 
   onSubmit = async () => {
@@ -100,9 +103,30 @@ export class HomeComponent implements OnInit, OnDestroy{
     const emailFrom = this.form.value.emailFrom;
     const emailTo = this.form.value.emailTo;
 
-    const response = await this.restService.sendMail(uuid, emailFrom, emailTo);
-    console.log(response);
+    const response: any= await this.restService.sendMail(uuid, emailFrom, emailTo);
+    if(response.hasOwnProperty("error")) {
+      this.onShowAlert(response.error)
+    }
+    else{
+      this.onShowAlert(response.message)
+    }
 
+  }
+
+  onShowAlert = (message: string) => {
+    let alertTimer;
+    this.showAlert = true
+    const alert: HTMLElement = document.querySelector('.alert') as HTMLElement;
+    this.message = message;
+
+    // alert.style.transform = "translate(-50%, 0px)"
+    clearTimeout(alertTimer);
+    alertTimer = setInterval(() => {
+      // alert.style.transform = "translate(-50%, -70px)"
+      // alert.style.transform = "translate(-50%, -70px)"
+      this.showAlert = false
+      console.log(this.showAlert)
+    }, 2000);
   }
 
   ngOnDestroy() {
