@@ -16,5 +16,5 @@ html, body{
     height: 100%;
     background: var(--base-bg-color);
     height: 100vh;
-    /* overflow: hidden; */
+    overflow-x: hidden;
 }

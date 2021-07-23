@@ -20,6 +20,7 @@ export class HomeComponent implements OnInit, OnDestroy{
   form!: FormGroup
   message: string = ""
   showAlert: boolean = false;
+  alertTimer: any;
   // scaleX: any;
 
   constructor(private restService: RestService) {}
@@ -114,15 +115,15 @@ export class HomeComponent implements OnInit, OnDestroy{
   }
 
   onShowAlert = (message: string) => {
-    let alertTimer;
     this.showAlert = true
     const alert: HTMLElement = document.querySelector('.alert') as HTMLElement;
     this.message = message;
 
-    // alert.style.transform = "translate(-50%, 0px)"
-    clearTimeout(alertTimer);
-    alertTimer = setInterval(() => {
-      // alert.style.transform = "translate(-50%, -70px)"
+    alert.style.transform = "translate(0px, -50%)"
+    clearTimeout(this.alertTimer);
+    this.alertTimer = setInterval(() => {
+      this.message = "";
+      alert.style.transform = "translate(200px, -50%)"
       // alert.style.transform = "translate(-50%, -70px)"
       this.showAlert = false
       console.log(this.showAlert)
