@@ -21,6 +21,8 @@ export class HomeComponent implements OnInit, OnDestroy{
   message: string = ""
   showAlert: boolean = false;
   alertTimer: any;
+  isLoading: boolean = false;
+
   // scaleX: any;
 
   constructor(private restService: RestService) {}
@@ -72,13 +74,21 @@ export class HomeComponent implements OnInit, OnDestroy{
 
   onUploadFile = (file: File) => {
 
+    this.isLoading = true
+    console.log("Bahar wala", this.isLoading)
     this.subscription = (this.restService.uploadFile(file)).subscribe((result) => {
       this.upload! = result as uploadType
-      console.log(result)
-      // this.scaleX = `scale(${(this.upload.progress/100)})`;
-      // console.log(this.scaleX)
+      
+      if(this.upload.progress < 100){
+        this.isLoading = false
+      }
+      else if(this.upload.progress == 100 && this.upload.file === undefined){
+        this.isLoading = true
+      }
+      else if(this.upload.progress == 100 && this.upload.file !== undefined) {
+        this.isLoading = false
+      }
 
-      this.showLink(this.upload)
     })
   }
 
@@ -99,7 +109,6 @@ export class HomeComponent implements OnInit, OnDestroy{
       return;
     }
 
-    console.log(this.form.value)
     const uuid = this.upload.file.split('/').pop() || "";
     const emailFrom = this.form.value.emailFrom;
     const emailTo = this.form.value.emailTo;
@@ -124,7 +133,6 @@ export class HomeComponent implements OnInit, OnDestroy{
     this.alertTimer = setInterval(() => {
       this.message = "";
       alert.style.transform = "translate(200px, -50%)"
-      // alert.style.transform = "translate(-50%, -70px)"
       this.showAlert = false
       console.log(this.showAlert)
     }, 2000);
