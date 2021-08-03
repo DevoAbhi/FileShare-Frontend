@@ -16,10 +16,13 @@ export class RestService {
     constructor(private http: HttpClient) { }
 
     // Folder upload API
-    uploadFile = (file: File) => {
+    uploadFile = (files: FileList) => {
 
         const fileData = new FormData();
-        fileData.append('myfile', file)
+
+        for (const file of files) {
+          fileData.append('myfile', file)
+        }
 
         return this.http.post(uploadUrl, fileData, {
             reportProgress: true,

@@ -8,7 +8,7 @@
                     <img src="assets/images/FileShare-img-file.png" class="right" alt="">
                 </div>
 
-                <input type="file" class="fileInput" (change)="onBrowseFile($event)">
+                <input type="file" class="fileInput" (change)="onBrowseFile($event)" multiple>
                 <div class="title">
                     Drop your files here or <span class="browse" (click)="onBrowse()">browse</span>
                 </div>
@@ -58,6 +58,3 @@
 </div>
 
 <div class="alert">{{message}}</div>
-<!-- <div class="alert" [style.transform]="'translate(-50%, 70px)'">{{message}}</div> -->
-<!-- *ngIf="showAlert === true"  -->
-<!-- [style.transform]="'translate(-50%, 70px)'" -->

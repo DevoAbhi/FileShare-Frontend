@@ -55,8 +55,8 @@ export class HomeComponent implements OnInit, OnDestroy{
     const dropZone = document.querySelector('.drop-section')
     dropZone?.classList.remove('dragged');
 
-    const file:File = event.dataTransfer?.files[0] as File;
-    this.onUploadFile(file)
+    const files: FileList = event.dataTransfer?.files as FileList;
+    this.onUploadFile(files)
   }
 
   onBrowse = () => {
@@ -65,20 +65,16 @@ export class HomeComponent implements OnInit, OnDestroy{
   }
 
   onBrowseFile = (event: any) => {
-    const file: File = event.target.files[0] as File;
-    if(file != null) {
-      this.onUploadFile(file);
-    }
-    console.log(event)
+    const files: FileList = event.target.files as FileList;
+    this.onUploadFile(files);
   }
 
-  onUploadFile = (file: File) => {
+  onUploadFile = (files: FileList) => {
 
     this.isLoading = true
-    console.log("Bahar wala", this.isLoading)
-    this.subscription = (this.restService.uploadFile(file)).subscribe((result) => {
+    this.subscription = (this.restService.uploadFile(files)).subscribe((result) => {
       this.upload! = result as uploadType
-      
+
       if(this.upload.progress < 100){
         this.isLoading = false
       }
@@ -90,11 +86,6 @@ export class HomeComponent implements OnInit, OnDestroy{
       }
 
     })
-  }
-
-  showLink = (upload: uploadType) => {
-    const { file } = upload
-    console.log(file)
   }
 
   onCopy = () => {
@@ -134,7 +125,6 @@ export class HomeComponent implements OnInit, OnDestroy{
       this.message = "";
       alert.style.transform = "translate(200px, -50%)"
       this.showAlert = false
-      console.log(this.showAlert)
     }, 2000);
   }
 
