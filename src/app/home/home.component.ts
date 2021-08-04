@@ -30,7 +30,8 @@ export class HomeComponent implements OnInit, OnDestroy{
   ngOnInit(): void {
     this.form = new FormGroup({
       emailFrom : new FormControl(null, [Validators.required]),
-      emailTo : new FormControl(null, [Validators.required])
+      emailTo : new FormControl(null, [Validators.required]),
+      time : new FormControl(null)
     }) as FormGroup
   }
 
@@ -103,15 +104,39 @@ export class HomeComponent implements OnInit, OnDestroy{
     const uuid = this.upload.file.split('/').pop() || "";
     const emailFrom = this.form.value.emailFrom;
     const emailTo = this.form.value.emailTo;
+    const hours = this.form.value.time?.split(":")[0]
+    const minutes = this.form.value.time?.split(":")[1]
+    console.log(hours)
+    console.log(minutes)
 
-    const response: any= await this.restService.sendMail(uuid, emailFrom, emailTo);
-    if(response.hasOwnProperty("error")) {
+    this.restService.sendEmailReq = {
+      uuid,
+      emailFrom,
+      emailTo
+    };
+
+    if(hours !== undefined && minutes !== undefined) {
+      const time = await this.getTime(hours, minutes);
+      this.restService.sendEmailReq['time'] = time;
+    }
+
+    const response: any= await this.restService.sendMail();
+    if(response.error !== undefined) {
       this.onShowAlert(response.error)
     }
     else{
       this.onShowAlert(response.message)
     }
 
+  }
+
+  getTime = async (hours: any, minutes: any) => {
+    let time = new Date();
+    time.setHours(hours);
+    time.setMinutes(minutes);
+    time.setSeconds(0);
+    time.setMilliseconds(0);
+    return time;
   }
 
   onShowAlert = (message: string) => {

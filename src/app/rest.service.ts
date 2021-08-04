@@ -12,6 +12,7 @@ const uploadUrl = `${BACKEND_HOST}/api/files`
 export class RestService {
 
     sendEmailRes = {};
+    sendEmailReq: any;
 
     constructor(private http: HttpClient) { }
 
@@ -54,12 +55,13 @@ export class RestService {
         }
     }
 
-    sendMail = async (uuid: string, emailFrom: string, emailTo:string) => {
+    sendMail = async () => {
 
       const emailPayload = {
-        uuid,
-        emailFrom,
-        emailTo
+        uuid: this.sendEmailReq.uuid,
+        emailFrom: this.sendEmailReq.emailFrom,
+        emailTo: this.sendEmailReq.emailTo,
+        time: this.sendEmailReq.time
       }
 
       await this.http.post(`${uploadUrl}/send`, emailPayload).toPromise()
